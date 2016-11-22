@@ -41,8 +41,6 @@ public class Main {
             inhoud += regel + System.lineSeparator();
             regel = br1.readLine();
         }
-        System.out.println(classNames.get(3));
-
 
         System.out.println("Save file als: (geef index)");
         int i = 1;
