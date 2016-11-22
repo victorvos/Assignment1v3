@@ -10,72 +10,90 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import static java.lang.System.out;
+import static java.util.logging.Logger.global;
 
 public class Main {
+    public static ArrayList<String> classNames = new ArrayList();
+
+    public void Register(String className){
+        classNames.add(className);
+    }
+
 
     public static void main(String[] args) throws IOException {
         InputStreamReader isr = new InputStreamReader(System.in);
-        BufferedReader br1 = new BufferedReader(isr);	// Dit zijn de verschillende input velden.
+        BufferedReader br1 = new BufferedReader(isr);
         BufferedReader br2 = new BufferedReader(isr);
         BufferedReader br3 = new BufferedReader(isr);
 
-        ArrayList<Format> formats = new ArrayList();
-
-        formats.add(new Word97());
-        formats.add(new XML());
-        formats.add(new Text());
-        formats.add(new HTML());
-        formats.add(new RTF());
+        new HTML();
+        new XML();
+        new Text();
+        new Word97();
+        new RTF();
 
         System.out.println("Inhoud bestand:");
 
         String inhoud = "";
 
-        String regel = br1.readLine();	// Met deze loop kun je het bestand schrijven.
-        while (!regel.equals("")) {		// Systeem blijft om input vragen totaal de gebruiker alleen op Enter drukt.
+        String regel = br1.readLine();
+        while (!regel.equals("")) {
             inhoud += regel + System.lineSeparator();
             regel = br1.readLine();
         }
-
+        System.out.println(classNames.get(3));
 
 
         System.out.println("Save file als: (geef index)");
         int i = 1;
-        for(Format f : formats) {
-            System.out.println(i + " " + f.getFormat());
+        for(String s : classNames) {
+            System.out.println(i + " " + s);
             i++;
         }
 
-        String naam = br2.readLine();	// Hiermee kan een gebruiker input geven.
+        Scanner scanner = new Scanner(System.in);
+        out.println("Kies uw index: ");
+        int index = new Integer(scanner.next());
+        if (index>=1 && index<=classNames.size()){
+            index -= 1;
+        }
+        else{
+            scanner.close();
+            out.println("Onjuiste index...");
+        }
+
+        String formatChoice = classNames.get(index);        // String van geselecteerde Class naam
+
+        String naam = br2.readLine();
 
         while(true){
-            String type1 = br3.readLine();	// Hiermee kan een gebruiker input geven.
-            try {	// Als de gebruiker geen int invult komt er geen error, maar kan de gebruiker gewoon opnieuw proberen.
-                int type2 = Integer.parseInt(type1);	// Maakt van String een int.
+            String type1 = br3.readLine();
+            try {
+                int type2 = Integer.parseInt(type1);
 
-                if (formats.size() < type2-1 || type2 <= 0){
+                if (classNames.size() < type2-1 || type2 <= 0){
                     System.out.println("Selecteer een geldig getal");
-                    continue;	// Ga terug naar begin van de while loop.
+                    continue;
                 } else {
-                    String fm = naam + formats.indexOf(type2);	// Maakt van de ingevoerde gegevens een String, om deze gemakkelijk meerdere keren te gebruiken.
-                    FileWriter fw1 = new FileWriter(fm);		// Hiermee wordt de file ook echt opgeslagen in de workspace folder.
+                    String fm = naam + classNames.indexOf(type2+1);
+                    FileWriter fw1 = new FileWriter(fm);
                     PrintWriter pw1 = new PrintWriter(fw1);
                     pw1.println(inhoud);
                     pw1.close();
                     System.out.println("File is opgeslagen als " + fm);
-                    break;		// Verlaat de while loop.
+                    break;
                 }
             }
-            catch (NumberFormatException e){	// Deze Exception komt voor wanneer je van een String een int wilt maken en de String bestaat uit iets anders dan een int.
+            catch (NumberFormatException e){
                 System.out.println("Voer een geldig getal in");
-                continue;		// Ga terug naar begin van de while loop.
+                continue;
             }
         }
         br1.close();
         br2.close();
         br3.close();
 //        try {
-//            Class c = SaveAs.class;
+//            Class c = c.class;
 //            Method[] m = c.getDeclaredMethods();
 //            String z = null;
 //            for (int i = 0; i < m.length; i++){
@@ -89,9 +107,6 @@ public class Main {
 //            System.err.println(e);
 //        }
 
-//        Scanner scanner = new Scanner(System.in);
-//        out.println("Kies uw index: ");
-//        int index = new Integer(scanner.next());
 
 //
 //        try {

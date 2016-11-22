@@ -5,9 +5,11 @@ package Scenario1;
  */
 public class XML implements Format {
     private String format;
+    Main m = new Main();
 
     public XML(){
         this.format = ".XML";
+        m.Register("XML");
     }
 
     @Override
@@ -18,5 +20,11 @@ public class XML implements Format {
     @Override
     public void setFormat(String f) {
         format = f;
+    }
+
+    @Override
+    public void SaveAS(){
+        System.out.println(format + " is opgeslagen");
+        //implementatie voor bijbehorende format (SaveAS) kan hier worden gecodeerd.
     }
 }

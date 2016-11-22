@@ -6,7 +6,9 @@ import java.lang.reflect.Method;
  * Created by Eigenaar on 21-11-2016.
  */
 public interface Format {
-    public String getFormat();
+    String getFormat();
 
-    public void setFormat(String format);
+    void setFormat(String format);
+
+    void SaveAS();
 }

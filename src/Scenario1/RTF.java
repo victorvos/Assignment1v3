@@ -5,9 +5,11 @@ package Scenario1;
  */
 public class RTF implements Format{
     private String format;
+    Main m = new Main();
 
     public RTF(){
         this.format = ".RTF";
+        m.Register("RTF");
     }
 
     @Override
@@ -18,5 +20,11 @@ public class RTF implements Format{
     @Override
     public void setFormat(String f) {
         format = f;
+    }
+
+    @Override
+    public void SaveAS(){
+        System.out.println(format + " is opgeslagen");
+        //implementatie voor bijbehorende format (SaveAS) kan hier worden gecodeerd.
     }
 }

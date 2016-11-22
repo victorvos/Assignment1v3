@@ -5,8 +5,10 @@ package Scenario1;
  */
 public class HTML implements Format {
     private String format;
+    Main m = new Main();
 
     public HTML(){
+        m.Register("HTML");
         this.format = ".html";
     }
 
@@ -18,5 +20,11 @@ public class HTML implements Format {
     @Override
     public void setFormat(String f) {
         format = f;
+    }
+
+    @Override
+    public void SaveAS(){
+        System.out.println(format + " is opgeslagen");
+        //implementatie voor bijbehorende format (SaveAS) kan hier worden gecodeerd.
     }
 }

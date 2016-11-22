@@ -5,9 +5,11 @@ package Scenario1;
  */
 public class Word97 implements  Format{
     private String format;
+    Main m = new Main();
 
     public Word97(){
         this.format = ".docx";
+        m.Register("Word97");
     }
 
     @Override
@@ -18,5 +20,11 @@ public class Word97 implements  Format{
     @Override
     public void setFormat(String f) {
         format = f;
+    }
+
+    @Override
+    public void SaveAS(){
+        System.out.println(format + " is opgeslagen");
+        //implementatie voor bijbehorende format (SaveAS) kan hier worden gecodeerd.
     }
 }
