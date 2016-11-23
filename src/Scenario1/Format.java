@@ -10,5 +10,5 @@ public interface Format {
 
     void setFormat(String format);
 
-    void SaveAS();
+    void SaveAs();
 }

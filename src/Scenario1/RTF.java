@@ -23,7 +23,7 @@ public class RTF implements Format{
     }
 
     @Override
-    public void SaveAS(){
+    public void SaveAs(){
         System.out.println(format + " is opgeslagen");
         //implementatie voor bijbehorende format (SaveAS) kan hier worden gecodeerd.
     }

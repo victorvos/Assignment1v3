@@ -1,6 +1,7 @@
 package Scenario1;
 
 import java.io.*;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 /**
@@ -30,7 +31,7 @@ public class Main {
         new XML();
         new Text();
         new Word97();
-        new RTF();
+        new RTF();      //init nieuw format
 
         System.out.println("Inhoud bestand:");
 
@@ -50,30 +51,19 @@ public class Main {
         }
 
         Scanner scanner = new Scanner(System.in);
-        out.println("Kies uw index: ");
-        int index = new Integer(scanner.next());
-        if (index>=1 && index<=classNames.size()){
-            index -= 1;
-        }
-        else{
-            scanner.close();
-            out.println("Onjuiste index...");
-        }
-
-        String formatChoice = classNames.get(index);        // String van geselecteerde Class naam
-
-        String naam = br2.readLine();
-
         while(true){
-            String type1 = br3.readLine();
-            try {
-                int type2 = Integer.parseInt(type1);
 
-                if (classNames.size() < type2-1 || type2 <= 0){
-                    System.out.println("Selecteer een geldig getal");
-                    continue;
-                } else {
-                    String fm = naam + classNames.indexOf(type2+1);
+            try {
+                out.println("getal tussen 1 en " + classNames.size() + ":");
+                int index = new Integer(scanner.next());
+                if (index>=1 && index<=classNames.size()){
+                    index -= 1;
+                    String formatChoice = classNames.get(index);        // String van geselecteerde Class naam
+                    Class<?> c = Class.forName("Scenario1." + formatChoice);
+                    Object obj = c.newInstance();
+                    Method m = c.getDeclaredMethod("getFormat");
+                    String format = (String) m.invoke(obj);                         // de geimplementeerde SaveAs methode kan met m.invoke(args) worden uitgevoerd.
+                    String fm = "filenaam" + format;
                     FileWriter fw1 = new FileWriter(fm);
                     PrintWriter pw1 = new PrintWriter(fw1);
                     pw1.println(inhoud);
@@ -81,15 +71,28 @@ public class Main {
                     System.out.println("File is opgeslagen als " + fm);
                     break;
                 }
+                else{
+                    out.println("Onjuiste index...");
+                    continue;
+                }
             }
             catch (NumberFormatException e){
                 System.out.println("Voer een geldig getal in");
                 continue;
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            } catch (NoSuchMethodException e) {
+                e.printStackTrace();
+            } catch (InstantiationException e) {
+                e.printStackTrace();
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            } catch (InvocationTargetException e) {
+                e.printStackTrace();
             }
-        }
-        br1.close();
-        br2.close();
-        br3.close();
+            scanner.close();
+    }
+
 //        try {
 //            Class c = c.class;
 //            Method[] m = c.getDeclaredMethods();
