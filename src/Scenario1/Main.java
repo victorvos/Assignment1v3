@@ -59,11 +59,11 @@ public class Main {
                 if (index>=1 && index<=classNames.size()){
                     index -= 1;
                     String formatChoice = classNames.get(index);        // String van geselecteerde Class naam
-                    Class<?> c = Class.forName("Scenario1." + formatChoice);
+                    Class<?> c = Class.forName("Scenario1." + formatChoice);        // geeft de juiste Class op basis van de keuze in het menu.
                     Object obj = c.newInstance();
                     Method m = c.getDeclaredMethod("getFormat");
-                    String format = (String) m.invoke(obj);                         // de geimplementeerde SaveAs methode kan met m.invoke(args) worden uitgevoerd.
-                    String fm = "filenaam" + format;
+                    String format = (String) m.invoke(obj);                         // de geimplementeerde SaveAs methode kan met m.invoke(obj) ook worden uitgevoerd.
+                    String fm = "filenaam" + format;                                // er moet natuurlijk wel met getDeclaredMethod("SaveAs")
                     FileWriter fw1 = new FileWriter(fm);
                     PrintWriter pw1 = new PrintWriter(fw1);
                     pw1.println(inhoud);
