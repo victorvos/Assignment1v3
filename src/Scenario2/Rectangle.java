@@ -6,7 +6,7 @@ package Scenario2;
 public class Rectangle implements Shape {
 
     @Override
-    public void display(int x1, int x2, int y1, int y2){
-
+    public void display(int x, int y, int w, int h){
+        System.out.println("Rectangle drawn at " + x + ',' + y + " with width " + w + " and height " + h);
     }
 }

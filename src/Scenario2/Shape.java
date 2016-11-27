@@ -6,6 +6,4 @@ package Scenario2;
 public interface Shape {
 
     void display(int x, int y, int w, int h);
-
-    void display(int x1, int x2, int y1, int y2);
 }
